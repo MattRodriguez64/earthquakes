@@ -63,7 +63,8 @@ if __name__ == "__main__":
 
     if get_db:
         result = get_db.query("""
-            SELECT * FROM earthquakes;
-        """)
+            SELECT * FROM earthquakes WHERE earthquake_time >= 1787184000000;;
+        """)[0]
 
-        print(f"RESULT : {result}")
+        print(f"RESULT : {float(result[-4].replace("(", "").replace(")", "").split(",")[0])}")
+        print(f"R : {result}")

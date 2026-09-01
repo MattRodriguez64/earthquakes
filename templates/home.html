@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="author" content="Matt RODRIGUEZ">
+        <meta name="description" content="A short description...">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <link rel="stylesheet" href="static/styles/styles.css">
+    </head>
+    <body>
+        <div class="nav-bar-container">
+            <nav class="nav-bar-menu">
+                <ul class="nav-bar-links">
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">DATA</a></li>
+                    <li><a href="#">ABOUT US</a></li>
+                    <li><a href="#">CONTACT US</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-map">
+            {{ iframe | safe}}
+        </div>
+        
+        <footer>
+            <p>Footer</p>
+        </footer>
+    </body>
+</html>
