@@ -7,25 +7,28 @@
         <meta name="description" content="A short description...">
         <meta name="keywords" content="HTML, CSS, JavaScript">
         <link rel="stylesheet" href="static/styles/styles.css">
+        {{ bokeh_resources | safe }}
     </head>
     <body>
         <div class="nav-bar-container">
             <nav class="nav-bar-menu">
                 <ul class="nav-bar-links">
                     <li><a href="#">HOME</a></li>
-                    <li><a href="/data">DATA</a></li>
+                    <li><a href="#">DATA</a></li>
                     <li><a href="#">ABOUT US</a></li>
                     <li><a href="#">CONTACT US</a></li>
                 </ul>
             </nav>
         </div>
 
-        <div class="main-map">
-            {{ iframe | safe}}
+        <div class="main">
+            {{ div | safe }}
+            
         </div>
         
         <footer>
             <p>Footer</p>
         </footer>
+        {{ script | safe }}
     </body>
 </html>

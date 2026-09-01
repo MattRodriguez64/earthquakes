@@ -1,8 +1,12 @@
 from flask import Flask, render_template_string, render_template
 import folium
 from config.database import get_db_instance
-import sys
 import requests
+import datetime
+from bokeh.plotting import figure
+from bokeh.embed import components
+from bokeh.resources import CDN
+import random
 
 app = Flask(__name__)
 
@@ -84,14 +88,61 @@ def main():
 
         for data in result:
             long_lat_str = data[-4].replace("(", "").replace(")", "").split(",")
+            print(float(data[4]))
+            seismic_date = datetime.datetime.fromtimestamp(float(data[4]) / 1000.0)
             folium.Marker(
                 location=[float(long_lat_str[1]), float(long_lat_str[0])],
                 tooltip="Seismic details",
-                popup=f"{data[3]}",
+                popup=f"""
+                        <link rel="stylesheet" href="static/styles/styles.css">
+                        <div class="popup_window">
+                            <h3 class="popup_title"> {data[3].upper()} </h3><br>
+                            <p><i><b>Id :</b> {data[1]}</i></p>
+                            <p><b>Date :</b> {seismic_date.year}-{seismic_date.month}-{seismic_date.day}</p>
+                            <p><b>URL :</b> <a href="{data[7]}">More Info Here.</a></p>
+                            <hr>
+                            <p class="popup_mag"><b>Magnitude :</b> {data[2]}</p>
+                            <p><b>Depth :</b> {data[-3]} Km</p>
+                            <p><b>Sources :</b> {data[19]}</p>
+                            <p><b>Type :</b> {data[26]}</p>
+                            <p><b>Tsunami alert :</b> {"YES" if data[14] == 1 else "NO"}</p>
+                        </div>
+                        """,
                 icon=folium.Icon(color="green"),
             ).add_to(m)
     iframe = m.get_root()._repr_html_()
     return render_template('home.html', iframe=iframe)
+
+@app.route("/data")
+def data():
+    x = [1, 2, 3, 4, 5]
+    y = [4, 7, 2, 8, 5]
+
+    graphique = figure(
+        title="Exemple de graphique Bokeh",
+        x_axis_label="Valeur X",
+        y_axis_label="Valeur Y",
+        height=400,
+        sizing_mode="stretch_width",
+        tools="pan,wheel_zoom,box_zoom,reset,save"
+    )
+    
+    graphique.line(
+        x,
+        y,
+        line_width=3,
+        color="#2563eb",
+        legend_label="Mes données"
+    )
+
+    graphique.scatter(
+        x,
+        y,
+        size=10,
+        color="#dc2626"
+    )
+    script, div = components(graphique)
+    return render_template('data.html', bokeh_resources=CDN.render(), script=script, div=div)
 
 if __name__ == "__main__":
     app.run(debug=True)

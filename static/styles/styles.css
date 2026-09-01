@@ -59,3 +59,27 @@ footer {
     color: white;
     font-weight: 500;
 }
+
+.popup_window {
+    height: 200px;
+    width: 300px;
+}
+
+.popup_window p {
+    margin: 0px;
+}
+
+.popup_window hr {
+    border: 1px solid #28684A;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.popup_mag {
+    color: #E54D2E;
+}
+
+.popup_title {
+    color: #30A46C;
+    margin: 0px;
+}
