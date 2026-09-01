@@ -141,6 +141,7 @@ def data():
         size=10,
         color="#dc2626"
     )
+    
     script, div = components(graphique)
     return render_template('data.html', bokeh_resources=CDN.render(), script=script, div=div)
 
