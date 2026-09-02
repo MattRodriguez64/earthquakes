@@ -40,6 +40,12 @@ class DatabaseConnector:
         self.db_cursor.close()
         return result
 
+    def query_update(self, query, params):
+        self.connect_cursor()
+        result = self.db_cursor.execute(query=query, params=params)
+        self.db_connection.commit()
+        self.db_cursor.close()
+
     def close_database(self):
         try:
             self.db_connection.close()
