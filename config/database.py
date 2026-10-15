@@ -22,7 +22,7 @@ class DatabaseConnector:
     def connect_database(self):
         if self.db_connection is None:
             try:
-                temp_db_connection = psycopg.connect(host="localhost", dbname="earthquakes", user="", password="", port=5432)
+                temp_db_connection = psycopg.connect(host="localhost", dbname="earthquakes", user="postgres", password="admin", port=5432)
 
                 # if self.db_connection._check_connection_ok:
                 self.db_connection = temp_db_connection
